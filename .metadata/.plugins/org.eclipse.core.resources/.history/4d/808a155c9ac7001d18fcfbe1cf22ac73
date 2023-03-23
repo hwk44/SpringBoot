@@ -1,0 +1,10 @@
+package edu.pnu.domain;
+
+public class Person {
+
+	private String name;
+	private int year;
+	private String job;
+	private String hobby;
+	
+}
