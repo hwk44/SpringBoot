@@ -28,7 +28,6 @@ INDEX VERSION 1.132+C:\Users\SW\SpringBootQuickStart\.metadata\.plugins\org.ecli
 665170817.index
 357840065.index
 2863004040.index
-3675373195.index
 2844931298.index
 1649320608.index
 943838817.index

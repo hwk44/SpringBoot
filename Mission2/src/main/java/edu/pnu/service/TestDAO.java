@@ -1,13 +1,14 @@
 package edu.pnu.service;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.pnu.domain.TestVO;
 
 public class TestDAO {
 
-	List<TestVO> list;
+	List<TestVO> list; // = new ArrayList();
 
 	public Connection con;
 	public Statement stmt;
@@ -74,13 +75,14 @@ public class TestDAO {
 	// 전체 출력
 	public List<TestVO> getTestlist() {
 		String query = "SELECT * FROM TEST";
+		list = new ArrayList();
 		try {
 			
 			psmt = con.prepareStatement(query); // 동적 쿼리문 준비
 			rs = psmt.executeQuery();
 
 			while(rs.next()) {
-				 list.add(new TestVO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4)));
+				 list.add(new TestVO(rs.getInt("id"), rs.getString("pass"), rs.getString("name"), rs.getDate("regidate")));
 			}
 			return list;
 		} catch (Exception e) {
