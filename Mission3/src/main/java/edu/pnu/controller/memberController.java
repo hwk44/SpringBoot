@@ -4,30 +4,33 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+//import org.springframework.web.bind.annotation.RequestMapping;
+//import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.pnu.DAO.memberDAO;
 import edu.pnu.domain.memberVO;
-import jakarta.security.auth.message.callback.PrivateKeyCallback.Request;
+//import jakarta.security.auth.message.callback.PrivateKeyCallback.Request;
 
 @RestController
 public class memberController {
 	
 	private memberDAO memberdao;
 	private static final Logger log = LoggerFactory.getLogger(memberController.class);
-
-	
 	
 	public memberController() {
-		// TODO Auto-generated constructor stub
 		memberdao = new memberDAO();
-		log.info("TestController 생성자");
+//		log.info("TestController 생성자");
+//		log.error("Error Message 입니다.");
+//		log.warn("warn Message 입니다.");
+//		log.info("info Message 입니다.");
+//		log.debug("debug Message 입니다.");
+//		log.trace("trace Message 입니다.");
 	}
 	
 	
@@ -53,6 +56,7 @@ public class memberController {
 	@PostMapping("/member")
 	public memberVO addMember(memberVO member) {
 		log.info("addMember(member) post 방식");
+		System.out.println(member);
 		return memberdao.addMember(member);
 	}
 	
@@ -63,4 +67,10 @@ public class memberController {
 		return memberdao.updateMember(member);
 	}
 
+	// Delete 방식으로 delete
+	@DeleteMapping("/member/{id}")
+	public Integer deleteMember(@PathVariable Integer id) {
+		log.info("deleteMember()");
+		return memberdao.deleteMember(id);
+	}
 }

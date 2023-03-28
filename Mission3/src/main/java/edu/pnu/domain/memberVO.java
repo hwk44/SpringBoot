@@ -9,8 +9,9 @@ package edu.pnu.domain;
 		String name;
 		Date regidate;
 		
-		memberVO() {
+		public memberVO() {
 			// 기본생성자
+			System.out.println("memberVO 기본생성자입니다.");
 		}
 		
 		public memberVO(int id, String pass, String name, Date regidate) {
@@ -19,6 +20,19 @@ package edu.pnu.domain;
 			this.pass = pass;
 			this.name = name;
 			this.regidate = regidate;
+		}
+//		
+//		public memberVO(String pass, String name, Date regidate) {
+////			super();
+//			this.pass = pass;
+//			this.name = name;
+//			this.regidate = regidate;
+//		}
+//		
+
+		@Override
+		public String toString() {
+			return "memberVO [id=" + id + ", pass=" + pass + ", name=" + name + ", regidate=" + regidate + "]";
 		}
 		
 

@@ -4,6 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import edu.pnu.domain.memberVO;
 
 public class memberDAO {
@@ -21,8 +23,8 @@ public class memberDAO {
 			Class.forName("org.h2.Driver");
 
 //				 H2 DB 에 연결
-//			String url = "jdbc:h2:tcp://localhost/~/springboot"; // 학교 pc
-			String url = "jdbc:h2:~/springboot"; // 노트북 
+			String url = "jdbc:h2:tcp://localhost/~/springboot"; // 학교 pc
+//			String url = "jdbc:h2:~/springboot"; // 노트북 
 			String id = "sa";
 			String pwd = "";
 			con = DriverManager.getConnection(url, id, pwd);
@@ -58,6 +60,7 @@ public class memberDAO {
 		String query = "SELECT * FROM MEMBER WHERE id=?";
 
 		try {
+
 			// 쿼리 실행
 			psmt = con.prepareStatement(query); // 동적 쿼리문 준비
 			psmt.setInt(1, id); // 쿼리문 첫 번째 인파라미터 값 설정
@@ -78,12 +81,13 @@ public class memberDAO {
 		String query = "SELECT * FROM member";
 		list = new ArrayList<memberVO>();
 		try {
-			
+
 			psmt = con.prepareStatement(query); // 동적 쿼리문 준비
 			rs = psmt.executeQuery();
 
-			while(rs.next()) {
-				 list.add(new memberVO(rs.getInt("id"), rs.getString("pass"), rs.getString("name"), rs.getDate("regidate")));
+			while (rs.next()) {
+				list.add(new memberVO(rs.getInt("id"), rs.getString("pass"), rs.getString("name"),
+						rs.getDate("regidate")));
 			}
 			return list;
 		} catch (Exception e) {
@@ -94,45 +98,85 @@ public class memberDAO {
 
 	// put방식 update
 	public memberVO updateMember(memberVO member) { // 멤버 객체를 받음
-		
-		String query = "UPDATE MEMBER SET pass=?, name=? where id=?";
+
+		if (member.getId() == 0) return null; // 아이디 없을때
 		try {
-			// 쿼리 실행
-			psmt = con.prepareStatement(query); // 동적 쿼리문 준비
-			psmt.setString(1, member.getPass()); // 쿼리문 첫 번째 인파라미터 값 설정
-			psmt.setString(2, member.getName()); 
-			psmt.setInt(3, member.getId()); 
-			psmt.executeUpdate();
+			if (member.getName() == null && member.getPass() == null) {
+
+			} else if (member.getName() == null) {
+				// 쿼리 실행
+				String query = "UPDATE MEMBER SET pass=? where id=?";
+				psmt = con.prepareStatement(query); // 동적 쿼리문 준비
+				psmt.setString(1, member.getPass()); // 쿼리문 첫 번째 인파라미터 값 설정
+				psmt.setInt(2, member.getId());
+				psmt.executeUpdate();
+			} else if (member.getPass() == null) {
+				// 쿼리 실행
+				String query = "UPDATE MEMBER SET name=? where id=?";
+				psmt = con.prepareStatement(query); // 동적 쿼리문 준비
+				psmt.setString(1, member.getName());
+				psmt.setInt(2, member.getId());
+				psmt.executeUpdate();
+			} else { // 둘다 있을 때
+				String query = "UPDATE MEMBER SET pass=?, name=? where id=?";
+				psmt = con.prepareStatement(query); // 동적 쿼리문 준비
+				psmt.setString(1, member.getPass()); // 쿼리문 첫 번째 인파라미터 값 설정
+				psmt.setString(2, member.getName());
+				psmt.setInt(3, member.getId());
+				psmt.executeUpdate();
+			}
+			return getMember(member.getId());
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-				
-		return member;
+
+		return null;
 	}
 
 	/*
 	 * put과 post 차이?
-	 * */
-	
+	 */
+
 	// post방식 add
 	public memberVO addMember(memberVO member) {
-		
-		String query = "INSERT INTO MEMBER(id,pass, name) values(?,?,?)";
-		try {
-			// 쿼리 실행
-			psmt = con.prepareStatement(query); // 동적 쿼리문 준비
-			psmt.setInt(1, member.getId()); // 쿼리문 첫 번째 인파라미터 값 설정
-			
-			psmt.setString(2, member.getPass()); 
-			psmt.setString(3, member.getName()); 
-			psmt.executeUpdate();
 
+		if (member.getName() != null && member.getPass() != null) {
+			try {
+//				String query = "INSERT INTO MEMBER(id, pass, name) values(?,?,?)";
+				String query = "INSERT INTO MEMBER(pass, name) values(?,?)";
+
+				psmt = con.prepareStatement(query); // 동적 쿼리문 준비
+
+//				psmt.setInt(1, member.getId()); // 쿼리문 첫 번째 인파라미터 값 설정
+//				psmt.setString(2, member.getPass());
+//				psmt.setString(3, member.getName());
+
+				psmt.setString(1, member.getPass());
+				psmt.setString(2, member.getName());
+				psmt.executeUpdate();
+
+				List<memberVO> l = this.getMemberlist(); // 쿼리 리스트 불러오기
+				return l.get(l.size() - 1);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
+	public Integer deleteMember(Integer id) {
+
+		String query = "DELETE FROM member " + " WHERE id =?";
+		try {
+			psmt = con.prepareStatement(query); // 동적 쿼리문 준비
+			psmt.setInt(1, id); // 쿼리문 첫 번째 인파라미터 값 설정
+			psmt.executeUpdate(); // 쿼리 실행
+			return id;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-				
-		return member;
+		return null;
 	}
 
 }
