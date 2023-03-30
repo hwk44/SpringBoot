@@ -31,6 +31,7 @@ public class MemberDAOH2Impl implements MemberInterface {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+//			String e
 		}
 		String query = "SELECT * FROM member";
 		list = new ArrayList<MemberVO>();

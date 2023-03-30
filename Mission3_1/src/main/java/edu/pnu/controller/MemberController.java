@@ -56,5 +56,6 @@ public class MemberController {
 	public MemberVO updateMember(MemberVO member) {
 		return memberService.updateMember(member);
 	}
+	
 	 
 }
