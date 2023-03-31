@@ -3,7 +3,7 @@ package edu.pnu.memberDAO;
 import java.util.List;
 import java.util.Map;
 
-import edu.pnu.memberdomain.MemberVO;
+import edu.pnu.domain.MemberVO;
 
 public interface MemberInterface {
 

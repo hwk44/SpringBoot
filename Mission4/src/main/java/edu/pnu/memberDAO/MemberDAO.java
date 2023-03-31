@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import edu.pnu.memberdomain.MemberVO;
+import edu.pnu.domain.MemberVO;
 
 public class MemberDAO implements MemberInterface {
 
@@ -91,13 +91,15 @@ public class MemberDAO implements MemberInterface {
 	public MemberVO addMember(MemberVO member) {
 		if (member.getName() != null && member.getPass() != null) {
 			if (member.getId() == 0) { // 입력 아이디가 없으면
-				member.setId(list.get(list.size() - 1).getId() + 1);
+				member.setId(list.get(list.size() - 1).getId() + 1); // 마지막 친구의 아이디 + 1
 			}
 			map = new HashMap<>();
 			map.put("method", "post");
 			map.put("regidate", new Date());
 			try {
 				String query = "INSERT INTO MEMBER(pass, name) values(?,?)";
+				String querylog = "INSERT INTO MEMBER(pass, name) values(+"
+						+ member.getPass() + "," +member.getName()+")";
 				
 				psmt = con.prepareStatement(query); // 동적 쿼리문 준비
 				psmt.setString(1, member.getPass());
@@ -105,13 +107,14 @@ public class MemberDAO implements MemberInterface {
 				psmt.executeUpdate();
 
 				map.put("success", true);
-				map.put("sqlstring", query);
+				map.put("sqlstring", querylog);
 				
 				member.setRegidate(new Date());
 				list.add(member);
 				return member;
 			} catch (Exception e) {
 				map.put("sqlstring", e.getMessage());
+				map.put("success", false);
 				e.printStackTrace();
 			}
 		}
@@ -138,18 +141,26 @@ public class MemberDAO implements MemberInterface {
 	@Override
 	public MemberVO getMember(int id) {
 		String query = "SELECT * FROM MEMBER WHERE id=?";
+
+		String querylog = query.replace("?", "").concat(String.valueOf(id));
 		map = new HashMap<>();
 		map.put("method", "get");
 		map.put("regidate", new Date());
+		map.put("sqlstring", querylog);
+		
+		map.put("success", false);
 		try {
 			
 			psmt = con.prepareStatement(query);
 			psmt.setInt(1, id);
 			rs = psmt.executeQuery();
 			
-			map.put("sqlstring", query);
-			map.put("success", true);
+			querylog.concat(String.valueOf(id));
+			
+			
 			if (rs.next()) {
+				map.put("sqlstring", querylog);
+				map.put("success", true);
 				return new MemberVO(rs.getInt("id"), rs.getString("pass"), rs.getString("name"),
 						rs.getDate("regidate"));
 			}
@@ -165,27 +176,37 @@ public class MemberDAO implements MemberInterface {
 	// update
 	@Override
 	public MemberVO updateMember(MemberVO member) { // 멤버 객체를 받음
-		if (member.getId() == 0)
+		String querylog = "UPDATE MEMBER SET pass="+member.getPass()+
+				", name =" + member.getName() + " where id=" +member.getId();
+		map = new HashMap<>();
+		if (member.getId() == 0) {
+			map.put("method", "put");
+			map.put("regidate", new Date());
+			map.put("sqlstring", querylog);
+			map.put("success", false);
 			return null; // 아이디 없을때
+		}
 		try {
 
-			map = new HashMap<>();
 			map.put("method", "put");
 			map.put("regidate", new Date());
 
-			if (member.getName() == null && member.getPass() == null) {
-
-			} else if (member.getName() == null) {
+			if (member.getName() == null && member.getPass() == null) { // 이름 패스 둘다 없음
+				map.put("sqlstring", querylog);
+				map.put("success", false);
+				return null;
+			} else if (member.getName() == null) { // 이름만 없음
 				// 쿼리 실행
-				String query = "UPDATE MEMBER SET pass=? where id=?";
+				String query = "UPDATE MEMBER SET pass=?, name=? where id=?";
 				psmt = con.prepareStatement(query); // 동적 쿼리문 준비
 				psmt.setString(1, member.getPass()); // 쿼리문 첫 번째 인파라미터 값 설정
-				psmt.setInt(2, member.getId());
+				psmt.setString(2, member.getName()); // 쿼리문 첫 번째 인파라미터 값 설정
+				psmt.setInt(3, member.getId());
 				psmt.executeUpdate();
 
-				map.put("sqlstring", query);
+				map.put("sqlstring", querylog);
 				map.put("success", true);
-			} else if (member.getPass() == null) {
+			} else if (member.getPass() == null) {// 패스만 없음
 				// 쿼리 실행
 				String query = "UPDATE MEMBER SET name=? where id=?";
 				psmt = con.prepareStatement(query); // 동적 쿼리문 준비
@@ -193,7 +214,7 @@ public class MemberDAO implements MemberInterface {
 				psmt.setInt(2, member.getId());
 				psmt.executeUpdate();
 
-				map.put("sqlstring", query);
+				map.put("sqlstring", querylog);
 				map.put("success", true);
 			} else { // 둘다 있을 때
 				String query = "UPDATE MEMBER SET pass=?, name=? where id=?";
@@ -202,10 +223,10 @@ public class MemberDAO implements MemberInterface {
 				psmt.setString(2, member.getName());
 				psmt.setInt(3, member.getId());
 				psmt.executeUpdate();
-				map.put("sqlstring", query);
+				map.put("sqlstring", querylog);
 				map.put("success", true);
 			}
-			return getMember(member.getId());
+			return member;
 
 		} catch (Exception e) {
 			map.put("sqlstring", e.getMessage());
@@ -222,24 +243,25 @@ public class MemberDAO implements MemberInterface {
 		map = new HashMap<>();
 		map.put("method", "delete");
 		map.put("regidate", new Date());
+		map.put("success", true);
 
 		String query = "DELETE FROM member " + " WHERE id =?";
-//		if(list.contains(member))
+		String querylog = query.replace("?", "").concat(String.valueOf(id));
+		map.put("sqlstring", querylog);
 		try {
-		
-			map.put("success", true);
+			
 			psmt = con.prepareStatement(query); // 동적 쿼리문 준비
 			psmt.setInt(1, id); // 쿼리문 첫 번째 인파라미터 값 설정
 			psmt.executeUpdate(); // 쿼리 실행
-			map.put("sqlstring", query);
 			
 			for (MemberVO vo : list) {
 				if (vo.getId() == id) {
 					list.remove(vo);
+					map.put("success", true);
 					return vo;
 				}
+				return null;
 			}
-			
 //			return list.get(id);
 		} catch (Exception e) {
 			map.put("sqlstring", e.getMessage());

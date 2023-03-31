@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+
 import java.util.Date;
 import java.util.Map;
 
@@ -43,7 +44,7 @@ public class LogDAO implements LogInterface{
 			psmt.setString(1, (String) map.get("method")); 
 			psmt.setString(2, (String) map.get("sqlstring")); 
 			psmt.setObject(3, new Date());
-			psmt.setBoolean(4, (Boolean) map.get("success")); 
+			psmt.setObject(4, (boolean) map.get("success")); 
 			psmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

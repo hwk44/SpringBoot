@@ -2,11 +2,12 @@ package edu.pnu.service;
 
 import java.util.List;
 
+import edu.pnu.domain.MemberVO;
 import edu.pnu.logDAO.LogDAO;
 import edu.pnu.logDAO.LogInterface;
 import edu.pnu.memberDAO.MemberDAO;
+import edu.pnu.memberDAO.MemberDAOListImpl;
 import edu.pnu.memberDAO.MemberInterface;
-import edu.pnu.memberdomain.MemberVO;
 
 public class MemberService {
 
@@ -15,8 +16,12 @@ public class MemberService {
 
 	public MemberService() {
 		memberDAO = new MemberDAO();
+//		memberDAO = new MemberDAOListImpl();
+		
 		logdao = new LogDAO();
-	}
+		
+		
+		}
 
 	public MemberVO getMember(int id) {
 		MemberVO vo = memberDAO.getMember(id);
