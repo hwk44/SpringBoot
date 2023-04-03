@@ -1,12 +1,9 @@
 package edu.pnu.service;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import edu.pnu.domain.MemberVO;
 import edu.pnu.memberDAO.MemberDAOH2Impl;
-import edu.pnu.memberDAO.MemberDAOListImpl;
 import edu.pnu.memberDAO.MemberInterface;
 
 public class MemberService {

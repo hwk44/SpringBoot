@@ -6,7 +6,6 @@ import edu.pnu.domain.MemberVO;
 import edu.pnu.logDAO.LogDAO;
 import edu.pnu.logDAO.LogInterface;
 import edu.pnu.memberDAO.MemberDAO;
-import edu.pnu.memberDAO.MemberDAOListImpl;
 import edu.pnu.memberDAO.MemberInterface;
 
 public class MemberService {
