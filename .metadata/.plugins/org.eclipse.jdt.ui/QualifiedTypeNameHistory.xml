@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="edu.pnu.controller.BoardController"/>
-    <fullyQualifiedTypeName name="java.lang.StringIndexOutOfBoundsException"/>
-    <fullyQualifiedTypeName name="edu.pnu.domain.Person"/>
-    <fullyQualifiedTypeName name="edu.pnu.sevice.BoardService"/>
-    <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
-    <fullyQualifiedTypeName name="java.lang.reflect.Member"/>
-    <fullyQualifiedTypeName name="edu.pnu.DAO.TestDAO"/>
-    <fullyQualifiedTypeName name="edu.pnu.service.TestService"/>
-    <fullyQualifiedTypeName name="edu.pnu.domain.TestVO"/>
     <fullyQualifiedTypeName name="edu.pnu.service.TestDAO"/>
     <fullyQualifiedTypeName name="edu.pnu.DAO.memberDAO"/>
     <fullyQualifiedTypeName name="edu.pnu.domain.memberVO"/>
@@ -28,7 +19,6 @@
     <fullyQualifiedTypeName name="edu.pnu.service.MemberService"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PutMapping"/>
     <fullyQualifiedTypeName name="edu.pnu.memberdomain.MemberVO"/>
     <fullyQualifiedTypeName name="java.sql.Connection"/>
@@ -47,13 +37,27 @@
     <fullyQualifiedTypeName name="javax.persistence.Id"/>
     <fullyQualifiedTypeName name="javax.persistence.GeneratedValue"/>
     <fullyQualifiedTypeName name="javax.persistence.Temporal"/>
-    <fullyQualifiedTypeName name="javax.persistence.Column"/>
     <fullyQualifiedTypeName name="javax.persistence.TemporalType"/>
-    <fullyQualifiedTypeName name="javax.persistence.Entity"/>
     <fullyQualifiedTypeName name="javax.persistence.Persistence"/>
-    <fullyQualifiedTypeName name="javax.persistence.EntityManagerFactory"/>
     <fullyQualifiedTypeName name="javax.persistence.EntityTransaction"/>
-    <fullyQualifiedTypeName name="com.rubypaper.domain.Board"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="javax.persistence.TableGenerator"/>
+    <fullyQualifiedTypeName name="javax.persistence.Table"/>
+    <fullyQualifiedTypeName name="javax.persistence.EntityManagerFactory"/>
     <fullyQualifiedTypeName name="javax.persistence.EntityManager"/>
+    <fullyQualifiedTypeName name="javax.persistence.TypedQuery"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.lang.SuppressWarnings"/>
+    <fullyQualifiedTypeName name="java.lang.Object"/>
+    <fullyQualifiedTypeName name="javax.persistence.Entity"/>
+    <fullyQualifiedTypeName name="com.rubypaper.domain.BoardJPA"/>
+    <fullyQualifiedTypeName name="javax.persistence.Column"/>
+    <fullyQualifiedTypeName name="org.hibernate.annotations.ColumnDefault"/>
+    <fullyQualifiedTypeName name="org.hibernate.annotations.CreationTimestamp"/>
+    <fullyQualifiedTypeName name="javax.transaction.Transaction"/>
+    <fullyQualifiedTypeName name="com.rubypaper.domain.Board"/>
+    <fullyQualifiedTypeName name="lombok.ToString"/>
+    <fullyQualifiedTypeName name="lombok.Builder"/>
+    <fullyQualifiedTypeName name="org.hibernate.annotations.DynamicInsert"/>
+    <fullyQualifiedTypeName name="org.hibernate.annotations.DynamicUpdate"/>
 </qualifiedTypeNameHistroy>
