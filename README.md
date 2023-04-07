@@ -5,10 +5,12 @@
 ## Mission2 
  - put update / post add 
 
+## Mission4
+- LogDAO 추가
 ## Mission5 
  - 어노테이션 사용
 
-# ORM => DAO VO relation 과 매핑을 어떻게 할 것인가?
+## ORM => DAO VO relation 과 매핑을 어떻게 할 것인가?
  - 엔터프라이즈 빈즈
 
 ## JPA Hibernate
@@ -16,3 +18,6 @@
  - Transaction 의 commit 으로 DB에 query 보냄
 ### Transcation rollback
  - seq ? index ??
+
+### 연관관계 매핑
+ - 보통 관계형 데이터베이스는 기본적으로 다대일(N:1) 이다.

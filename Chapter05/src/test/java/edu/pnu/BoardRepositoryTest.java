@@ -13,15 +13,43 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import edu.pnu.domain.Board;
+import edu.pnu.domain.BoardTest;
+import edu.pnu.domain.Member;
 import edu.pnu.persistence.BoardRepository;
+import edu.pnu.persistence.BoardTestRepository;
+import edu.pnu.persistence.MemberRepository;
 
 @SpringBootTest
 public class BoardRepositoryTest {
 	
 	@Autowired
+	BoardTestRepository boardtestRepo;
+	@Autowired
 	BoardRepository boardRepo;
+	@Autowired
+	MemberRepository memberRepo;
+	
+	@Test
+	public void testboard_member() {
+		Member m1 = new Member();
+		m1.setId("member1");
+		m1.setPassword("member111");
+		m1.setName("멤버1");
+		m1.setRole("User1");
+		memberRepo.save(m1);	
+			
+		BoardTest bt = new BoardTest();
+		bt.setMember(m1);
+		bt.setTitle("member1 가 등록한 게시글" );
+		bt.setContent("member 가 등록한 게시글 내용");
+		bt.setCreateDate(new Date());
+//		bt.setCnt((long) Math.random() * 50); // 50 이하 임의 정수
+		bt.setCnt(0L);
+		boardtestRepo.save(bt);
+	}
 //	@Test
 	public void BoardInsertTest() {
+		
 		for (int i = 0; i < 101; i++) {
 			
 		    double d = Math.random();
@@ -30,7 +58,7 @@ public class BoardRepositoryTest {
 			Board b = new Board();
 			b.setTitle("title"+i);
 			b.setContent("content" + i);
-			b.setWriter("writer" +i);
+//			b.setWriter("writer" +i);
 			b.setCreateDate(new Date());
 			b.setCnt(data);
 			
@@ -104,7 +132,7 @@ public class BoardRepositoryTest {
 		boardRepo.deleteById(1L);
 	}
 	
-	@Test
+//	@Test
 	public void test() {
 //		Pageable page = PageRequest.of(0, 3, Sort.Direction.DESC );
 		Pageable page = PageRequest.of(0, 5);

@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import edu.pnu.domain.Board;
 
+
 public interface BoardRepository extends CrudRepository<Board, Long> {
 	
 	List<Board> findByTitle(String searchKeyword);
