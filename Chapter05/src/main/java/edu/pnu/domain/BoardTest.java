@@ -43,7 +43,7 @@ public class BoardTest {
 	
 	public void setMember(Member member) {
 		this.member = member;
-		member.getBoardList().add(this);
+//		member.getBoardList().add(this.member);
 	}
 
 }
