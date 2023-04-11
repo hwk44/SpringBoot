@@ -3,9 +3,9 @@
 	<item key="org.eclipse.jdt.ui.last.selected.jre.kind2" value="2"/>
 	<item key="org.eclipse.jdt.ui.last.selected.execution.enviroment" value="JavaSE-17"/>
 	<item key="org.eclipse.jdt.ui.lastextjar" value="C:\Program Files (x86)\H2\bin"/>
-	<item key="Annotations" value="true"/>
-	<item key="Replace" value="true"/>
-	<item key="Comments" value="true"/>
+	<item key="Annotations" value="false"/>
+	<item key="Replace" value="false"/>
+	<item key="Comments" value="false"/>
 	<item key="InstanceOf" value="false"/>
 	<section name="org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart">
 		<item key="group_libraries" value="true"/>
