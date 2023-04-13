@@ -33,7 +33,7 @@
 			</c:forEach>
 	</table>
 <br />
-<a href="insertBoard">새글 등록</a>
+<a th:href="@{/insertBoard}">글등록</a>&nbsp;&nbsp;&nbsp;
 </center>
 </body>
 </html>
