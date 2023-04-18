@@ -6,9 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import edu.pnu.domain.MemberVO;
 
-//@Repository
+@Repository
 public class MemberDaoListImpl implements MemberInterface {
 	private List<MemberVO> list;
 	

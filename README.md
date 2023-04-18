@@ -26,9 +26,9 @@
  - forward / redirect 차이?
 
 ### Chapter06TH
- - controller 는 view 를 반환하고 rest
-ResponseBody json 형태로 데이터를 반환하겠다.
-RequestBody json 형태로 데이터를 받겠다.
+    controller 는 view 를 반환하고 restcontroller는 data 반환
+    ResponseBody json 형태로 데이터를 반환하겠다.
+    RequestBody json 형태로 데이터를 받겠다.
 
 ### Thymeleaf
     return 이 html 파일을 찾아줌

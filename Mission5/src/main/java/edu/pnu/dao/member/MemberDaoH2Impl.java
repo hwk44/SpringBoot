@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
 
 import edu.pnu.domain.MemberVO;
 
-@Repository
+//@Repository
 public class MemberDaoH2Impl implements MemberInterface {
 	private Connection con = null;
 	
